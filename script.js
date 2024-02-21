@@ -1,5 +1,5 @@
 // this is for the computer to always return equally randomly between the 3 options
-let parts = ["rock", "paper", "scissors"];
+let parts = ["Rock", "Paper", "Scissors"];
 
 // for getting a random choice between the three options for the computer
 function getComputerChoice () {
@@ -28,27 +28,56 @@ let computer = 0;
 
 //plays out the game between each options from both players
 function playRound (playerSelection, computerSelection) {
-    if (playerSelection == "rock" && computerSelection == "paper") {
-        computer++;
+    if (playerSelection == "Rock" && computerSelection == "Paper") {
+        ++computer;
         return "You lose! Paper beats Rock!";
-    } else if (playerSelection == "rock" && computerSelection == "scissors") {
-        player1++;
+    } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
+        ++player1;
         return "You win! Rock beats Scissors!";
-    } else if (playerSelection == "paper" && computerSelection == "scissors") {
-        computer++;
+    } else if (playerSelection == "Paper" && computerSelection == "Scissors") {
+        ++computer;
         return "You lose! Scissors beats Paper!";
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
-        player1++;
+    } else if (playerSelection == "Paper" && computerSelection == "Rock") {
+        ++player1;
         return "You win! Paper beats Rock!";
-    } else if (playerSelection == "scissors" && computerSelection == "paper") {
-        player1++;
+    } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+        ++player1;
         return "You win! Scissors beats Paper!";
-    } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        computer++;
+    } else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+        ++computer;
         return "You lose! Rock beats Scissors!";
     } else if (playerSelection === computerSelection) {
         return "It's a tie!";
     } else return "Please imput the correct option, this counts as a loss.";
 };
 
-console.log(game());
+// console.log(game());
+
+let btns = document.querySelector("#buttons");
+
+btns.addEventListener("click", (event) => {
+
+    let msg = document.querySelector("#message");
+
+    let score = document.querySelector("#score");
+
+    let playerSelection = "";
+    const computerSelection = getComputerChoice();
+
+    let target = event.target;
+
+    switch(target.id) {
+        case "btn1" : playerSelection = "Rock";
+        msg.textContent = `You choose: "Rock" - Computer choose: "${getComputerChoice()}"`;
+        break;
+        case "btn2" : playerSelection = "Paper";
+        msg.textContent = `You choose: "Paper" - Computer choose: "${getComputerChoice()}"`;
+        break;
+        case "btn3" : playerSelection = "Scissors";
+        msg.textContent = `You choose: "Scissors" - Computer choose: "${getComputerChoice()}"`;
+        break;
+    }
+
+    score.textContent= `Your score is: "${player1}" - Computer's score is "${computer}" - "${playRound(playerSelection, computerSelection)}"`;
+    // console.log(playRound(playerSelection, computerSelection));
+});

@@ -16,3 +16,7 @@ div {
     align-items: center;
     gap: 16px;
 }
+
+#message {
+    margin: 16px;
+}
