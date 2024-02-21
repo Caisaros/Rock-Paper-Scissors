@@ -78,6 +78,6 @@ btns.addEventListener("click", (event) => {
         break;
     }
 
-    score.textContent= `Your score is: "${player1}" - Computer's score is "${computer}" - "${playRound(playerSelection, computerSelection)}"`;
+    score.textContent= `"${playRound(playerSelection, computerSelection)}" - Your score is: "${player1}" - Computer's score is "${computer}"`;
     // console.log(playRound(playerSelection, computerSelection));
 });
