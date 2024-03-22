@@ -29,22 +29,22 @@ let computer = 0;
 //plays out the game between each options from both players
 function playRound (playerSelection, computerSelection) {
     if (playerSelection == "Rock" && computerSelection == "Paper") {
-        ++computer;
+        computer++;
         return "You lose! Paper beats Rock!";
     } else if (playerSelection == "Rock" && computerSelection == "Scissors") {
-        ++player1;
+        player1++;
         return "You win! Rock beats Scissors!";
     } else if (playerSelection == "Paper" && computerSelection == "Scissors") {
-        ++computer;
+        computer++;
         return "You lose! Scissors beats Paper!";
     } else if (playerSelection == "Paper" && computerSelection == "Rock") {
-        ++player1;
+        player1++;
         return "You win! Paper beats Rock!";
     } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
-        ++player1;
+        player1++;
         return "You win! Scissors beats Paper!";
     } else if (playerSelection == "Scissors" && computerSelection == "Rock") {
-        ++computer;
+        computer++;
         return "You lose! Rock beats Scissors!";
     } else if (playerSelection === computerSelection) {
         return "It's a tie!";
@@ -68,16 +68,23 @@ btns.addEventListener("click", (event) => {
 
     switch(target.id) {
         case "btn1" : playerSelection = "Rock";
-        msg.textContent = `You choose: "Rock" - Computer choose: "${getComputerChoice()}"`;
+        msg.textContent = `You choose: "Rock" - Computer choose: "${computerSelection}"`;
         break;
         case "btn2" : playerSelection = "Paper";
-        msg.textContent = `You choose: "Paper" - Computer choose: "${getComputerChoice()}"`;
+        msg.textContent = `You choose: "Paper" - Computer choose: "${computerSelection}"`;
         break;
         case "btn3" : playerSelection = "Scissors";
-        msg.textContent = `You choose: "Scissors" - Computer choose: "${getComputerChoice()}"`;
+        msg.textContent = `You choose: "Scissors" - Computer choose: "${computerSelection}"`;
         break;
     }
 
-    score.textContent= `"${playRound(playerSelection, computerSelection)}" - Your score is: "${player1}" - Computer's score is "${computer}"`;
+    score.textContent = `"${playRound(playerSelection, computerSelection)}" - Your score is: "${player1}" - Computer's score is "${computer}"`;
+
+    if (player1 === 3) {
+         score.textContent = "Congratulations! You win!";
+    } else if (computer === 3) {
+         score.textContent = "Defeat, You lose!";
+    }
     // console.log(playRound(playerSelection, computerSelection));
+    // console.log(getComputerChoice());
 });
