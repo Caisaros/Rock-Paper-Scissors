@@ -10,6 +10,8 @@ function getComputerChoice () {
 let player1 = 0;
 let computer = 0;
 
+let endGame = false;
+
 //best of 5 games played function
 // function game() {
 //     for (let i = 0; i < 5; i++) {
@@ -28,6 +30,7 @@ let computer = 0;
 
 //plays out the game between each options from both players
 function playRound (playerSelection, computerSelection) {
+    if (endGame == false) {
     if (playerSelection == "Rock" && computerSelection == "Paper") {
         computer++;
         return "You lose! Paper beats Rock!";
@@ -48,7 +51,8 @@ function playRound (playerSelection, computerSelection) {
         return "You lose! Rock beats Scissors!";
     } else if (playerSelection === computerSelection) {
         return "It's a tie!";
-    } else return "Please imput the correct option, this counts as a loss.";
+    } else return "Let's play again!";
+}
 };
 
 // console.log(game());
@@ -56,10 +60,15 @@ function playRound (playerSelection, computerSelection) {
 let btns = document.querySelector("#buttons");
 
 btns.addEventListener("click", (event) => {
+    if (endGame == false) {
 
     let msg = document.querySelector("#message");
 
     let score = document.querySelector("#score");
+    
+    // let theButtons = document.querySelector("#theButtons");
+    // theButtons.appendChild(btns);
+    let restart = document.createElement("button");
 
     let playerSelection = "";
     const computerSelection = getComputerChoice();
@@ -79,12 +88,30 @@ btns.addEventListener("click", (event) => {
     }
 
     score.textContent = `"${playRound(playerSelection, computerSelection)}" - Your score is: "${player1}" - Computer's score is "${computer}"`;
-
-    if (player1 === 3) {
+    
+    if (endGame === false) {
+    if (player1 === 5) {
          score.textContent = "Congratulations! You win!";
-    } else if (computer === 3) {
+         endGame = true;
+         btns.appendChild(restart);
+         restart.textContent = "Restart";
+         restart.addEventListener ("click", () => restartGame());
+    } else if (computer === 5) {
          score.textContent = "Defeat, You lose!";
+         endGame = true;
+         btns.appendChild(restart);
+         restart.textContent = "Restart";
+         restart.addEventListener ("click", () => restartGame());
+    }
+    };
+
+    function restartGame() {
+        player1 = 0;
+        computer = 0;
+        endGame = false;
+        btns.removeChild(restart);
     }
     // console.log(playRound(playerSelection, computerSelection));
     // console.log(getComputerChoice());
+}
 });
